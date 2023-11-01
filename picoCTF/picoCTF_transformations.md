@@ -97,13 +97,13 @@ This gives us
 import requests
 scrambled = requests.get("https://mercury.picoctf.net/static/77a2b202236aa741e988581e78d277a6/enc").text
 flag = ""
-b = 8
+n = 8
 for enc in scrambled:
     c = ord(enc)
-    a = c >> b
+    a = c >> n
     flag += chr(a)
-    n = c - (a << b)
-    flag += chr(n)
+    b = c - (a << n)
+    flag += chr(b)
 
 print(flag)
 ```
