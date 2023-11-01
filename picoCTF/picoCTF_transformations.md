@@ -57,8 +57,8 @@ Let `c` be the result of `(a << n) + b`
 
 We also know that:
 
-- `c` = `((a << n) + b)` = `(a * (2 ^ n) + b)` <sub>[3]</sub>
-- `a` = `(c >> n)` = `floor(c / (2 ^ n))` <sub>[3]</sub>
+- `c` = `(a << n) + b` = `(a * (2 ^ n)) + b` <sub>[3]</sub>
+- `a` = `c >> n` = `floor(c / (2 ^ n))` <sub>[3]</sub>
 - - If `b` < `(a << n) * 2`
 
 *Note that the floor function means that precision **will** be lost due to the right shifts.*
