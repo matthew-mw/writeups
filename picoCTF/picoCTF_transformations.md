@@ -1,10 +1,25 @@
-# Transformation | 20 points | Reverse Engineering
-## Understanding what the code does
-To solve this problem, we start by analyzing the code segment below.
+# [Transformation | 20 points | Reverse Engineering](https://play.picoctf.org/practice/challenge/104)
+
+## Problem Statement
+
+Description
+
+I wonder what this really is... [enc](https://mercury.picoctf.net/static/77a2b202236aa741e988581e78d277a6/enc)
+
 ```python
 ''.join([chr((ord(flag[i]) << 8) + ord(flag[i + 1])) for i in range(0, len(flag), 2)])
 ```
+
+## Understanding what the code does
+
+To solve this problem, we start by analyzing the code segment below.
+
+```python
+''.join([chr((ord(flag[i]) << 8) + ord(flag[i + 1])) for i in range(0, len(flag), 2)])
+```
+
 To make it easier to read, I will rewrite the code segment as:
+
 ```python
 result = []
 
@@ -13,11 +28,15 @@ for i in range(0, len(flag), 2):
     
 print(''.join(result))
 ```
+
 Since `flag[i + 1]` was passed to `ord()` without any problems in the snippet below, we can infer that the variable `flag` is of type `string` <sub>[1]</sub>
+
 ```python
 ord(flag[i + 1])
 ```
+
 We can also infer that the variable `flag` of type `string` can be split into segments of 2 based on the segment below.
+
 ```python
 for i in range(0, len(flag), 2):
 ```
@@ -26,9 +45,11 @@ In the code snippet below, We:
 - shift the ASCII representation of `flag[i]` left by 8 bits <sub>[3]</sub>
 - add the ASCII representation of `flag[i + 1]` to the result of the left shift
 - convert the result to a character using `chr()`
+
 ```python
 chr((ord(flag[i]) << 8) + ord(flag[i + 1]))
 ```
+
 ## Undoing the transformation
 
 ### Proof
@@ -93,6 +114,7 @@ This gives us
 `b` = `c - (a << n)`
 
 ## Putting it all together
+
 ```python
 import requests
 scrambled = requests.get("https://mercury.picoctf.net/static/77a2b202236aa741e988581e78d277a6/enc").text
