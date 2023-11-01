@@ -23,7 +23,7 @@ for i in range(0, len(flag), 2):
 ```
 
 In the code snippet below, We:
-- shift the ASCII representation of `flag[i]` left by 8 <sub>[3]</sub>
+- shift the ASCII representation of `flag[i]` left by 8 bits <sub>[3]</sub>
 - add the ASCII representation of `flag[i+1]` to the result of the left shift
 - convert the result to a character using `chr()`
 ```python
@@ -35,7 +35,7 @@ chr((ord(flag[i]) << 8) + ord(flag[i + 1]))
 
 To undo the transformation, we have to find the inverse of this manipulation.
 
-To find the original value that was shifted left, we shift the value of the ASCII number of the character right by 8.
+To find the original value that was shifted left, we shift the value of the ASCII number of the character right by 8 bits.
 
 This works, as ASCII values that are contained in the flag should all be printable characters found on the keyboard. These characters occupy the ASCII values 32 to 126 inclusive. <sub>[4]</sub>
 
